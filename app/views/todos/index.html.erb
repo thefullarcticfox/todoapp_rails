@@ -1,7 +1,51 @@
+
+<div id="todoapp">
+
+  <header>
+    <h1>Todos on backbone.js MVC</h1>
+    <input id="new-todo" type="text" placeholder="What needs to be done?">
+  </header>
+  <section id="main">
+    <input id="toggle-all" type="checkbox">
+    <label for="toggle-all">Mark all as complete</label>
+    <ul id="todo-list"></ul>
+  </section>
+  <footer>
+    <a id="clear-completed">Clear completed</a>
+    <div id="todo-count"></div>
+  </footer>
+</div>
+
+<div id="instructions">
+
+</div>
+
+<div id="credits">
+  Double-click to edit a todo.<br/>
+  Created by <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a><br/>
+  Rewritten by: <a href="https://github.com/tastejs/todomvc">TodoMVC</a><br/>
+  Ported to Rails 6 by salec
+</div>
+
+<!--erb works with controller.rb so it wont allow the same thing todo did in html-->
+<!--we need to make backbone render elements in loop with this template-->
+<!--because it will rerender this page in real time-->
+<!--the each do loop below does not rerender on change-->
+<!--i inserted raw html template in todos.js script to make this work-->
+<script type="text/template" id="item-template">
+  <% @todos.each do |todo| %>
+    <div class="view">
+      <input class="toggle" type="checkbox" <%= todo.done ? 'checked="checked"' : '' %> />
+      <label><%= todo.title %></label>
+      <a class="destroy"></a>
+    </div>
+    <input class="edit" type="text" value="<%= todo.title %>" />
+  <% end %>
+</script>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Todos</h1>
-
+<h1>Todos on standard Rails 6 MVC</h1>
 <table>
   <thead>
     <tr>
