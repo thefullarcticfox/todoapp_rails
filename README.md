@@ -4,6 +4,7 @@ Simple Todo List web app
 
 ### Includes
 * An implementation by Jérôme Gravel-Niquet's and TodoMVC ported to Rails 6
+([source](https://backbonejs.org/examples/todos/index.html))
 * Simple single page app implementation on backbone.js MVC
 * Simple multi-page scaffold implementation on Rails MVC
 
