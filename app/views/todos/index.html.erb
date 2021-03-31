@@ -1,7 +1,7 @@
 <!--Todoapp by Jérôme Gravel-Niquet-->
 <div id="todoapp">
   <header>
-    <h1>Todos App on backbone.js MVC</h1>
+    <h1>Todos on backbone.js MVC</h1>
     <input id="new-todo" type="text" placeholder="What needs to be done?">
   </header>
   <section id="main">
@@ -24,7 +24,7 @@
 </div>
 
 <!--Todos SPA-->
-<h1>Todos SPA on Backbone.js MVC</h1>
+<h1>Todos SPA on backbone.js MVC</h1>
 <div id="todospa">Loading todo SPA</div>
 
 <!--Todos simple rails 6 scaffold-->
@@ -53,10 +53,8 @@
 <br>
 <%= link_to 'New Todo', new_todo_path %>
 
-
 <!--erb works with controller.rb so it wont allow the same thing todo did in html-->
-<!--we need to make backbone render elements in loop with this template-->
-<!--because it will rerender this page in real time-->
+<!--need to make backbone render elements in loop with this template-->
 <!--the each do loop below does not rerender on change-->
 <!--i inserted raw html template in todo_app.js script to make this work-->
 <script type="text/template" id="item-template">
