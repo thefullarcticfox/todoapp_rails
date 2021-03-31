@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class TodosController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_todo, only: %i[show edit update destroy]
@@ -23,7 +22,6 @@ class TodosController < ApplicationController
   # POST /todos or /todos.json
   def create
     @todo = Todo.new(todo_params)
-
     respond_to do |format|
       if @todo.save
         format.html { redirect_to @todo, notice: 'Todo was successfully created.' }

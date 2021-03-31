@@ -4,7 +4,7 @@ import SingleTodoView from "./singletodo";
 
 let TodoIndexView = Backbone.View.extend({
     template: _.template("<table id=\"todos-table\">\n" +
-        "<tr><th></th><th>Title</th>\n" +
+        "<tr><th>Done</th><th>Title</th>\n" +
         "<th></th>\n<th></th>\n<th></th>\n</tr>\n" +
         "</table><br/><a href=\"#/new\">New Todo</a>"),
     initialize: function () {

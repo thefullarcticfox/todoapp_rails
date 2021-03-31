@@ -1,6 +1,6 @@
 import Backbone from "backbone";
 
-let TodoModel = Backbone.Model.extend({
+let Todo = Backbone.Model.extend({
     urlRoot: '/todos',
     defaults: {
         title: "empty todo",
@@ -12,7 +12,7 @@ let TodoModel = Backbone.Model.extend({
 });
 
 let TodoCollection = Backbone.Collection.extend({
-    model: TodoModel,
+    model: Todo,
     url: '/todos',
     comparator: 'created_at'
 });
