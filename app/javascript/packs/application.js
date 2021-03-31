@@ -10,6 +10,7 @@ import "channels";
 let $ = require("jquery");
 let _ = require("underscore");
 let Backbone = require("backbone");
+import TodoApp  from "./todo_app"
 
 console.log($.name)
 console.log("Underscore v" + _.VERSION);
@@ -18,7 +19,8 @@ console.log("Backbone v" + Backbone.VERSION);
 Rails.start();
 ActiveStorage.start();
 
+
 // load on DOM ready
 $(function () {
-
+    let SPA = new TodoApp;
 });

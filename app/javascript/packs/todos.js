@@ -8,19 +8,17 @@ import Backbone from "backbone"
 
 // Load the application once the DOM is ready, using `jQuery.ready`:
 $(function(){
-
     // Todo Model
     // ----------
 
     // Our basic **Todo** model has `title`, `order`, and `done` attributes.
     let Todo = Backbone.Model.extend({
-        // urlRoot: '/todos',
+        urlRoot: '/todos',
 
         // Default attributes for the todo item.
         defaults: function() {
             return {
                 title: "empty todo...",
-                // order: Todos.nextOrder(),
                 done: false
             };
         },
@@ -42,9 +40,6 @@ $(function(){
         model: Todo,
         url: '/todos',
 
-        // Save all of the todo items under the `"todos-backbone"` namespace.
-        // localStorage: new Backbone.LocalStorage("todos-backbone"),
-
         // Filter down the list of all todo items that are finished.
         done: function() {
             return this.where({done: true});
@@ -55,20 +50,9 @@ $(function(){
             return this.where({done: false});
         },
 
-        // We keep the Todos in sequential order, despite being saved by unordered
-        // GUID in the database. This generates the next order number for new items.
-        nextOrder: function() {
-            if (!this.length) return 1;
-            return this.last().get('order') + 1;
-        },
-
         // Todos are sorted by their original insertion order.
-        comparator: 'order'
-
+        comparator: 'created_at'
     });
-
-    // Create our global collection of **Todos**.
-    let Todos = new TodoList;
 
     // Todo Item View
     // --------------
@@ -81,7 +65,7 @@ $(function(){
 
         // Cache the template function for a single item.
         template: _.template("<div class=\"view\">\n" +
-            "<input class=\"toggle\" type=\"checkbox\" <%= done ? 'checked=\"checked\"' : '' %> />\n" +
+            "<input class=\"toggle\" type=\"checkbox\" <%= done ? 'checked=\"checked\"' : '' %> />" +
             "<label><%- title %></label>\n" +
             "<a class=\"destroy\"></a></div>\n" +
             "<input class=\"edit\" type=\"text\" value=\"<%- title %>\" />"),
@@ -179,23 +163,23 @@ $(function(){
             this.input = this.$("#new-todo");
             this.allCheckbox = this.$("#toggle-all")[0];
 
-            this.listenTo(Todos, 'add', this.addOne);
-            this.listenTo(Todos, 'reset', this.addAll);
-            this.listenTo(Todos, 'all', this.render);
+            this.listenTo(this.collection, 'add', this.addOne);
+            this.listenTo(this.collection, 'reset', this.addAll);
+            this.listenTo(this.collection, 'all', this.render);
 
             this.footer = this.$('footer');
             this.main = $('#main');
 
-            Todos.fetch();
+            this.collection.fetch();
         },
 
         // Re-rendering the App just means refreshing the statistics -- the rest
         // of the app doesn't change.
         render: function() {
-            let done = Todos.done().length;
-            let {length: remaining} = Todos.remaining();
+            let done = this.collection.done().length;
+            let {length: remaining} = this.collection.remaining();
 
-            if (Todos.length) {
+            if (this.collection.length) {
                 this.main.show();
                 this.footer.show();
                 this.footer.html(this.statsTemplate({done: done, remaining: remaining}));
@@ -215,32 +199,52 @@ $(function(){
 
         // Add all items in the **Todos** collection at once.
         addAll: function() {
-            Todos.each(this.addOne, this);
+            this.collection.each(this.addOne, this);
         },
 
-        // If you hit return in the main input field, create new **Todo** model,
-        // persisting it to *localStorage*.
+        // If you hit return in the main input field, create new **Todo** model
         createOnEnter: function(e) {
             if (e.keyCode !== 13) return;
             if (!this.input.val()) return;
 
-            Todos.create({title: this.input.val()});
+            this.collection.create({title: this.input.val()});
             this.input.val('');
         },
 
         // Clear all done todo items, destroying their models.
         clearCompleted: function() {
-            _.invoke(Todos.done(), 'destroy');
+            _.invoke(this.collection.done(), 'destroy');
             return false;
         },
 
         toggleAllComplete: function () {
             let done = this.allCheckbox.checked;
-            Todos.each(function (todo) { todo.save({'done': done}); });
+            this.collection.each(function (todo) { todo.save({'done': done}); });
         }
 
     });
 
-    // Finally, we kick things off by creating the **App**.
-    let App = new AppView;
-});
+    let AppRouter2 = Backbone.Router.extend({
+       initialize: function () {
+           this.collection = new TodoList;
+           this.appview = new AppView({collection: this.collection});
+       },
+
+        routes: {
+            "index"     : "index",
+            ".*"        : "index"
+       },
+
+       index: function () {
+           this.appview.render();
+       }
+    });
+
+    class Todos2 {
+        constructor() {
+            this.router = new AppRouter2;
+        }
+    }
+
+    let App = new Todos2;
+})
