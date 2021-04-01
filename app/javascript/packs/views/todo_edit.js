@@ -2,12 +2,12 @@ import Backbone from "backbone";
 import _ from "underscore";
 
 let TodoEditView = Backbone.View.extend({
-//  template: _.template($('#edittodo-template').html()), don't work
+//  template: _.template($('#todoedit-template').html()), don't work
     events: {
         "submit #edit-todo": "update"
     },
     initialize: function () {
-        this.template = _.template($('#edittodo-template').html());
+        this.template = _.template($('#todoedit-template').html());
     },
     update: function (e) {
         e.preventDefault();

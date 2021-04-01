@@ -2,12 +2,12 @@ import Backbone from "backbone";
 import _ from "underscore";
 
 let TodoNewView = Backbone.View.extend({
-//  template: _.template($('#newtodo-template').html()), don't work
+//  template: _.template($('#todonew-template').html()), don't work
     events: {
         "submit #new-todo": "save"
     },
     initialize: function () {
-        this.template = _.template($('#newtodo-template').html());
+        this.template = _.template($('#todonew-template').html());
         this.model = new this.collection.model();
         this.model.bind("change:errors", function () { this.render(); });
     },

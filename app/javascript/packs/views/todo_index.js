@@ -3,9 +3,9 @@ import _ from "underscore";
 import SingleTodoView from "./singletodo";
 
 let TodoIndexView = Backbone.View.extend({
-//  template: _.template($('#indextodo-template').html()), don't work
+//  template: _.template($('#todoindex-template').html()), don't work
     initialize: function () {
-        this.template = _.template($('#indextodo-template').html());
+        this.template = _.template($('#todoindex-template').html());
         this.listenTo(this.collection, 'reset', this.addAll);
         this.listenTo(this.collection, 'sync', this.render);
         this.collection.fetch();
