@@ -21,5 +21,5 @@ ActiveStorage.start();
 
 // load on DOM ready
 $(function () {
-    let SPA = new TodoSPA;
+    new TodoSPA;
 });
