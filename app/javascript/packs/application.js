@@ -6,11 +6,11 @@
 import Rails from "@rails/ujs";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
-
 let $ = require("jquery");
 let _ = require("underscore");
 let Backbone = require("backbone");
-import TodoSPA  from "./todo_spa"
+
+import TodoSPA from "./todo_spa"
 
 console.log($.name)
 console.log("Underscore v" + _.VERSION);

@@ -2,22 +2,12 @@ import Backbone from "backbone";
 import _ from "underscore";
 
 let TodoNewView = Backbone.View.extend({
-    template: _.template("<h1>New todo</h1>\n" +
-        "<form id=\"new-todo\" name=\"todo\">\n" +
-        "  <div class=\"field\">\n" +
-        "    <label for=\"title\"> title:</label>\n" +
-        "    <input type=\"text\" name=\"title\" id=\"title\" value=\"<%= title %>\" >\n" +
-        "  </div><div class=\"field\">\n" +
-        "    <label for=\"done\"> done:</label>\n" +
-        "    <input type=\"checkbox\" name=\"done\" id=\"done\" <%= done ? 'checked=\"checked\"' : '' %> />\n" +
-        "  </div>\n" +
-        "  <div class=\"actions\">\n" +
-        "    <input type=\"submit\" value=\"Create Todo\" />\n" +
-        "  </div></form><a href=\"#/index\">Back</a>"),
+//  template: _.template($('#newtodo-template').html()), don't work
     events: {
         "submit #new-todo": "save"
     },
     initialize: function () {
+        this.template = _.template($('#newtodo-template').html());
         this.model = new this.collection.model();
         this.model.bind("change:errors", function () { this.render(); });
     },

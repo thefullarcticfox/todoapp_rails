@@ -58,12 +58,7 @@ $(function(){
         tagName:  "li",
 
         // Cache the template function for a single item.
-        template: _.template("<div class=\"view\">\n" +
-            "<input class=\"toggle\" type=\"checkbox\" <%= done ? 'checked=\"checked\"' : '' %> />" +
-            "<label><%- title %></label>\n" +
-            "<a class=\"destroy\"></a></div>\n" +
-            "<input class=\"edit\" type=\"text\" value=\"<%- title %>\" />"),
-        //_.template($('#item-template').html()),
+        template: _.template($('#item-template').html()),
 
         // The DOM events specific to an item.
         events: {
@@ -134,12 +129,7 @@ $(function(){
         el: $("#todoapp"),
 
         // Our template for the line of statistics at the bottom of the app.
-        statsTemplate: _.template(
-            "<% if (done) { %>\n" +
-            "<a id=\"clear-completed\">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>\n" +
-            "<% } %>\n" +
-            "<div class=\"todo-count\"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>\n"),
-        //_.template($('#stats-template').html()),
+        statsTemplate: _.template($('#stats-template').html()),
 
         // Delegated events for creating new items, and clearing completed ones.
         events: {

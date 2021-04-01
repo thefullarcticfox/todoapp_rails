@@ -3,11 +3,9 @@ import _ from "underscore";
 import SingleTodoView from "./singletodo";
 
 let TodoIndexView = Backbone.View.extend({
-    template: _.template("<table id=\"todos-table\">\n" +
-        "<tr><th>Done</th><th>Title</th>\n" +
-        "<th></th>\n<th></th>\n<th></th>\n</tr>\n" +
-        "</table><br/><a href=\"#/new\">New Todo</a>"),
+//  template: _.template($('#indextodo-template').html()), don't work
     initialize: function () {
+        this.template = _.template($('#indextodo-template').html());
         this.listenTo(this.collection, 'reset', this.addAll);
         this.listenTo(this.collection, 'sync', this.render);
         this.collection.fetch();

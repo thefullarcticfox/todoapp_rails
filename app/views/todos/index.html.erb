@@ -1,3 +1,7 @@
+<!--Templates for js apps-->
+<%= render "todo_app" %>
+<%= render "todo_spa" %>
+
 <!--Todoapp by Jérôme Gravel-Niquet-->
 <div id="todoapp">
   <header>
@@ -52,18 +56,3 @@
 </table>
 <br>
 <%= link_to 'New Todo', new_todo_path %>
-
-<!--erb works with controller.rb so it wont allow the same thing todo did in html-->
-<!--need to make backbone render elements in loop with this template-->
-<!--the each do loop below does not rerender on change-->
-<!--i inserted raw html template in todo_app.js script to make this work-->
-<script type="text/template" id="item-template">
-  <% @todos.each do |todo| %>
-    <div class="view">
-      <input class="toggle" type="checkbox" <%= todo.done ? 'checked="checked"' : '' %> />
-      <label><%= todo.title %></label>
-      <a class="destroy"></a>
-    </div>
-    <input class="edit" type="text" value="<%= todo.title %>" />
-  <% end %>
-</script>

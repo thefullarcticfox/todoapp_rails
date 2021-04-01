@@ -1,9 +1,9 @@
 import Backbone from "backbone";
+import TodoCollection from "./models/todo";
 import TodoIndexView from "./views/indextodo";
 import TodoNewView from "./views/newtodo";
 import TodoShowView from "./views/showtodo";
 import TodoEditView from "./views/edittodo";
-import TodoCollection from "./models/todo";
 
 let TodoRouter = Backbone.Router.extend({
     initialize: function(element) {
