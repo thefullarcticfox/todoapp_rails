@@ -6,8 +6,8 @@ import TodoEditView from "./views/edittodo";
 import TodoCollection from "./models/todo";
 
 let TodoRouter = Backbone.Router.extend({
-    initialize: function() {
-        this.elemid = $("#todospa");
+    initialize: function(element) {
+        this.el = element;
         this.todos = new TodoCollection;
     },
     routes: {
@@ -18,28 +18,28 @@ let TodoRouter = Backbone.Router.extend({
         ".*"       : "index"
     },
     index: function () {
-        this.view = new TodoIndexView({collection: this.todos})
-        this.elemid.html(this.view.render().el)
+        this.view = new TodoIndexView({collection: this.todos});
+        this.el.html(this.view.render().el);
     },
     newTodo: function () {
-        this.view = new TodoNewView({collection: this.todos})
-        this.elemid.html(this.view.render().el)
+        this.view = new TodoNewView({collection: this.todos});
+        this.el.html(this.view.render().el);
     },
     show: function (id) {
         let todo = this.todos.get(id);
         this.view = new TodoShowView({model: todo});
-        this.elemid.html(this.view.render().el)
+        this.el.html(this.view.render().el);
     },
     edit: function (id) {
-        let todo = this.todos.get(id)
-        this.view = new TodoEditView({model: todo})
-        this.elemid.html(this.view.render().el)
+        let todo = this.todos.get(id);
+        this.view = new TodoEditView({model: todo});
+        this.el.html(this.view.render().el);
     }
 });
 
 class TodoSPA {
     constructor() {
-        this.router = new TodoRouter;
+        this.router = new TodoRouter($("#todospa"));
         console.log(this.router);
         if (Backbone.History.started === false) {
             Backbone.history.start();
