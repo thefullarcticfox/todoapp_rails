@@ -1,0 +1,65 @@
+<!--Escaping erb controls by <%%= %> (adding a second % to the opening tag)-->
+
+<script type="text/template" id="singletodo-template">
+  <td>
+    <input type=checkbox name="done" id="done" <%%= done ? 'checked="checked"' : '' %> />
+  </td>
+  <td>
+    <label><%%= title %></label></td>
+  <td><a href="#/<%%= id %>">Show</a></td>
+  <td><a href="#/<%%= id %>/edit">Edit</a></td>
+  <td><a href="#/<%%= id %>/destroy" class="destroy">Destroy</a></td>
+</script>
+
+<script type="text/template" id="todoindex-template">
+  <table id="todos-table">
+    <tr>
+      <th>Done</th><th>Title</th><th></th><th></th><th></th>
+    </tr>
+  </table><br/>
+  <a href="#/new">New Todo</a>
+</script>
+
+<script type="text/template" id="todoshow-template">
+  <p>
+    <b>Title: </b><%%= title %></p><p><b>Done: </b>
+    <input type="checkbox" name="done" id="done" <%%= done ? 'checked="checked"' : '' %> />
+  </p>
+  <a href="#/index">Back</a>
+</script>
+
+<script type="text/template" id="todoedit-template">
+  <h1>Edit todo</h1>
+  <form id="edit-todo" name="todo">
+    <div class="field">
+      <label for="title"> title:</label>
+      <input type="text" name="title" id="title" value="<%%= title %>" >
+    </div>
+    <div class="field">
+      <label for="done"> done:</label>
+      <input type="checkbox" name="done" id="done" <%%= done ? 'checked="checked"' : '' %> />
+    </div>
+    <div class="actions">
+      <input type="submit" value="Update Todo" />
+    </div>
+  </form>
+  <a href="#/index">Back</a>
+</script>
+
+<script type="text/template" id="todonew-template">
+  <h1>New todo</h1>
+  <form id="new-todo" name="todo">
+    <div class="field">
+      <label for="title"> title:</label>
+      <input type="text" name="title" id="title" value="<%%= title %>" >
+    </div>
+    <div class="field">
+      <label for="done"> done:</label>
+      <input type="checkbox" name="done" id="done" <%%= done ? 'checked="checked"' : '' %> />
+    </div>
+    <div class="actions">
+      <input type="submit" value="Create Todo" />
+    </div>
+  </form>
+  <a href="#/index">Back</a>
+</script>
