@@ -1,9 +1,6 @@
 import Backbone from "backbone";
 import TodoCollection from "./models/todo";
-import TodoIndexView from "./views/todo_index";
-import TodoNewView from "./views/todo_new";
-import TodoShowView from "./views/todo_show";
-import TodoEditView from "./views/todo_edit";
+import TodoViews from "./views/todo_views";
 
 let TodoRouter = Backbone.Router.extend({
     initialize: function(element) {
@@ -18,21 +15,21 @@ let TodoRouter = Backbone.Router.extend({
         ".*"       : "index"
     },
     index: function () {
-        this.view = new TodoIndexView({collection: this.todos});
+        this.view = new TodoViews.IndexView({collection: this.todos});
         this.el.html(this.view.render().el);
     },
     newTodo: function () {
-        this.view = new TodoNewView({collection: this.todos});
+        this.view = new TodoViews.NewView({collection: this.todos});
         this.el.html(this.view.render().el);
     },
     show: function (id) {
         let todo = this.todos.get(id);
-        this.view = new TodoShowView({model: todo});
+        this.view = new TodoViews.ShowView({model: todo});
         this.el.html(this.view.render().el);
     },
     edit: function (id) {
         let todo = this.todos.get(id);
-        this.view = new TodoEditView({model: todo});
+        this.view = new TodoViews.EditView({model: todo});
         this.el.html(this.view.render().el);
     }
 });
