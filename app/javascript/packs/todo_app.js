@@ -153,7 +153,7 @@ $(function(){
             this.footer = this.$('footer');
             this.main = $('#main');
 
-            this.collection.fetch();
+            this.collection.fetch({reset: true});
         },
 
         // Re-rendering the App just means refreshing the statistics -- the rest

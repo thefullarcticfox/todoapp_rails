@@ -34,7 +34,7 @@ $(function () {
         initialize: function () {
             this.listenTo(this.collection, 'reset', this.addAll);
             this.listenTo(this.collection, 'sync', this.render);
-            this.collection.fetch();
+            this.collection.fetch({reset: true});
         },
         addOne: function (todo) {
             let view = new TodoViews.SingleTodoView({model: todo});
